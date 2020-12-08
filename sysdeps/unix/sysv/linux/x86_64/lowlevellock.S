@@ -90,7 +90,7 @@ __lll_lock_wait_private:
 
 1:	LIBC_PROBE (lll_lock_wait_private, 1, %rdi)
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 2:	movl	%edx, %eax
 	xchgl	%eax, (%rdi)	/* NB:	 lock is implied */
@@ -130,7 +130,7 @@ __lll_lock_wait:
 
 1:	LIBC_PROBE (lll_lock_wait, 2, %rdi, %rsi)
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 2:	movl	%edx, %eax
 	xchgl	%eax, (%rdi)	/* NB:	 lock is implied */
@@ -185,7 +185,7 @@ __lll_timedlock_wait:
 
 1:	movl	$SYS_futex, %eax
 	movl	$2, %edx
-	syscall
+	OCCLUM_SYSCALL
 
 2:	xchgl	%edx, (%rdi)	/* NB:   lock is implied */
 
@@ -279,7 +279,7 @@ __lll_timedlock_wait:
 	LOAD_FUTEX_WAIT (%esi)
 	movq	%r12, %rdi
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 	/* NB: %edx == 2 */
 	xchgl	%edx, (%r12)
@@ -336,7 +336,7 @@ __lll_unlock_wake_private:
 	LOAD_PRIVATE_FUTEX_WAKE (%esi)
 	movl	$1, %edx	/* Wake one thread.  */
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 	popq	%rdx
 	cfi_adjust_cfa_offset(-8)
@@ -366,7 +366,7 @@ __lll_unlock_wake:
 	LOAD_FUTEX_WAKE (%esi)
 	movl	$1, %edx	/* Wake one thread.  */
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 	popq	%rdx
 	cfi_adjust_cfa_offset(-8)
@@ -436,7 +436,7 @@ __lll_timedwait_tid:
 #endif
 	movq	%r12, %rdi
 	movl	$SYS_futex, %eax
-	syscall
+	OCCLUM_SYSCALL
 
 	cmpl	$0, (%rdi)
 	jne	1f

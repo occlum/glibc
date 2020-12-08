@@ -1313,7 +1313,9 @@ of this helper program; chances are you did not intend to run this program.\n\
   setup_vdso (main_map, &first_preload);
 
 #ifdef DL_SYSDEP_OSCHECK
-  DL_SYSDEP_OSCHECK (_dl_fatal_printf);
+  /* Occlum note: Disable the OS check in Occlum */
+  if (!IS_RUNNING_ON_OCCLUM)
+    DL_SYSDEP_OSCHECK (_dl_fatal_printf);
 #endif
 
   /* Initialize the data structures for the search paths for shared

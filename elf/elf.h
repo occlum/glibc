@@ -20,6 +20,7 @@
 #define	_ELF_H 1
 
 #include <features.h>
+#include "occlum_entry.h"
 
 __BEGIN_DECLS
 
@@ -1201,6 +1202,9 @@ typedef struct
 #define AT_L2_CACHEGEOMETRY	45
 #define AT_L3_CACHESIZE		46
 #define AT_L3_CACHEGEOMETRY	47
+
+/* Occlum note: Store the address of Occlum's syscall handler */
+#define AT_OCCLUM_ENTRY 48
 
 /* Note section contents.  Each entry in the note section begins with
    a header of a fixed form.  */
