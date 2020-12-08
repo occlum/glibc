@@ -25,7 +25,6 @@
 
 #define NEED_DL_SYSINFO_DSO	1
 
-
 #ifndef __ASSEMBLER__
 /* Get version of the OS.  */
 extern int _dl_discover_osversion (void) attribute_hidden;

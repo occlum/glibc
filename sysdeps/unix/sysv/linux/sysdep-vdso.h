@@ -41,7 +41,7 @@
 									      \
     __typeof (__vdso_##name) vdsop = __vdso_##name;			      \
     PTR_DEMANGLE (vdsop);						      \
-    if (vdsop != NULL)							      \
+    if (vdsop != NULL && !IS_RUNNING_ON_OCCLUM)				      \
       {									      \
 	sc_ret = INTERNAL_VSYSCALL_CALL (vdsop, sc_err, nr, ##args);	      \
 	if (!INTERNAL_SYSCALL_ERROR_P (sc_ret, sc_err))			      \
@@ -68,7 +68,7 @@
 									      \
     __typeof (__vdso_##name) vdsop = __vdso_##name;			      \
     PTR_DEMANGLE (vdsop);						      \
-    if (vdsop != NULL)							      \
+    if (vdsop != NULL && !IS_RUNNING_ON_OCCLUM)				      \
       {									      \
 	v_ret = INTERNAL_VSYSCALL_CALL (vdsop, err, nr, ##args);	      \
 	if (!INTERNAL_SYSCALL_ERROR_P (v_ret, err)			      \

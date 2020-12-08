@@ -144,7 +144,7 @@ typedef struct
      _head->self = _thrdescr;						      \
 									      \
      /* It is a simple syscall to set the %fs value for the thread.  */	      \
-     asm volatile ("syscall"						      \
+     asm volatile ("OCCLUM_SYSCALL"					      \
 		   : "=a" (_result)					      \
 		   : "0" ((unsigned long int) __NR_arch_prctl),		      \
 		     "D" ((unsigned long int) ARCH_SET_FS),		      \
