@@ -793,6 +793,12 @@ lose (int code, int fd, const char *name, char *realname, struct link_map *l,
   _dl_signal_error (code, name, NULL, msg);
 }
 
+/* Occlum Note: This function is left empty deliberately and should NOT be removed. */
+static void
+__attribute__((optimize("O0")))
+occlum_gdb_hook_map_object (ElfW(Addr) addr, const char *name, size_t name_len)
+{
+}
 
 /* Map in the shared object NAME, actually located in REALNAME, and already
    opened on FD.  */
@@ -1342,6 +1348,8 @@ cannot enable executable stack as shared object requires");
     }
 #endif
 
+  /* Occlum Note: Provide debug symbol information to SGX-GDB */
+  occlum_gdb_hook_map_object(l->l_addr, l->l_name, strlen(l->l_name));
   return l;
 }
 
